@@ -29,3 +29,9 @@ resource "aws_instance" "ubuntu" {
     Name = var.instance_name
   }
 }
+
+resource "terraform_data" "python_requirements" {
+  provisioner "local-exec" {
+    command = "pip install --upgrade --target ${path.module}/scripts -r ${path.module}/scripts/requirements.txt"
+  }
+}
